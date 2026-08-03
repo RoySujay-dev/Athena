@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="Athena.Web.styles.css" />
+    <!-- KaTeX: answers grounded in the RAG papers quote formulas in LaTeX notation; without a
+         math renderer the chat shows raw \[ ... \] markup. CDN is acceptable for the demo; for
+         a fully offline run, vendor these three files under wwwroot/. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+
+<body>
+    <!-- Streaming chat needs a live circuit; the whole app is interactive-server. -->
+    <Routes @rendermode="InteractiveServer" />
+    <script src="_framework/blazor.web.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        // Typesets math in COMPLETED assistant bubbles only. data-math-done guards double
+        // rendering across Blazor re-renders; completed bubble text never changes afterwards,
+        // so Blazor's diffing has no reason to touch the KaTeX-mutated nodes.
+        window.athenaRenderMath = function () {
+            if (typeof renderMathInElement !== "function") { return; }
+            document.querySelectorAll(".msg.assistant .bubble.done:not([data-math-done])")
+                .forEach(function (bubble) {
+                    bubble.setAttribute("data-math-done", "true");
+                    renderMathInElement(bubble, {
+                        delimiters: [
+                            { left: "\\[", right: "\\]", display: true },
+                            { left: "\\(", right: "\\)", display: false },
+                            { left: "$$", right: "$$", display: true },
+                        ],
+                        throwOnError: false,
+                    });
+                });
+        };
+    </script>
+</body>
+
+</html>

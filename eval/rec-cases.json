@@ -1,0 +1,45 @@
+{
+  "_comment": "Recommender gold set for the Part F harness (brief §11.2): 8 hand-labelled seeds. Four seeds (B3, B4, B5, C1) straddle the deliberately-adjacent B/C boundary, which is where the labelling judgement is actually tested. All four clusters are represented so the recommender is not graded only on topics the author tuned against. LABELLING POLICY — a document's own superseded lineage sibling is NOT labelled relevant: an analyst asking 'what else should I read after d516' is not helped by d516's own consultative draft, which says the same things in earlier wording. This is a judgement call with a measurable consequence, stated here so ablation 4 can be read honestly: because no gold list contains both members of a lineage pair, near-duplicate resolution can only help or be neutral on nDCG@5 in this set, and Duplicate Leakage has a true target of 0. Had the drafts been labelled relevant, dedup would have been penalised by nDCG while still being the right behaviour — the metric, not the method, would have been at fault.",
+  "cases": [
+    {
+      "_why": "Foundational RAG paper. Useful next reads are the retriever it is built on, the survey that situates it, and the retrieval-structure advance that followed.",
+      "seedDocId": "B1",
+      "relevantDocIds": ["B2", "B3", "B4"]
+    },
+    {
+      "_why": "Broad survey (the §9.1 lambda-sweep seed). Straddles B/C: it covers the architecture papers and reaches into graph and evaluation territory.",
+      "seedDocId": "B3",
+      "relevantDocIds": ["B1", "B2", "B4", "B5", "C1"]
+    },
+    {
+      "_why": "RAPTOR builds a hierarchy of summaries over chunks; the genuinely useful follow-ups are the papers that also restructure the retrieval index, including the graph-community line. Straddles B/C.",
+      "seedDocId": "B4",
+      "relevantDocIds": ["B1", "B3", "B5", "C1"]
+    },
+    {
+      "_why": "Edge et al. is the bridge document — indexed in B, but its follow-ups are the graph-RAG cluster. Straddles B/C.",
+      "seedDocId": "B5",
+      "relevantDocIds": ["C1", "C2", "C3", "B3"]
+    },
+    {
+      "_why": "Graph-RAG survey; useful follow-ups are the graph systems it surveys plus the general RAG survey it complements. Straddles B/C.",
+      "seedDocId": "C1",
+      "relevantDocIds": ["B5", "C2", "C3", "B3"]
+    },
+    {
+      "_why": "RAGAS v1. C5 is its own v2 and is deliberately NOT labelled (see labelling policy). What remains genuinely useful are the surveys whose evaluation sections cover this ground.",
+      "seedDocId": "C4",
+      "relevantDocIds": ["B3", "C1"]
+    },
+    {
+      "_why": "d516 final. A2 is its own consultative draft and is deliberately NOT labelled. A3 is the companion PSMOR revision issued the same day; A5 is the FSI executive summary of these very principles.",
+      "seedDocId": "A1",
+      "relevantDocIds": ["A3", "A5"]
+    },
+    {
+      "_why": "Cluster D seed (untuned topic). Zero Trust Architecture's useful follow-ups are the maturity model that operationalises it, the framework it sits inside, and the identity guidance behind its first pillar.",
+      "seedDocId": "D2",
+      "relevantDocIds": ["D5", "D1", "D4"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Thin adapter layer: [KernelFunction] attributes, argument shaping, result serialisation.
+       MMR/RRF/dedup/scoring arithmetic must never live here (design constraint 6). -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Athena.Core\Athena.Core.csproj" />
+    <ProjectReference Include="..\Athena.Retrieval\Athena.Retrieval.csproj" />
+    <ProjectReference Include="..\Athena.Recommendation\Athena.Recommendation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Athena.Tests" />
+    <!-- QaAnswerSource reuses FormatPassages so eval answers carry the exact citation tags
+         the guard and prompt contract on. -->
+    <InternalsVisibleTo Include="Athena.Eval" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SemanticKernel" />
+    <PackageReference Include="Microsoft.SemanticKernel.Yaml" />
+    <!-- RecommendPlugin: query embedding + the DocRecord collection (brief §9.6 ctor). -->
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The §8 prompt ships beside the binary; the copy flows transitively into any host's
+         output (Web, Agent, Eval), so AppContext.BaseDirectory/prompts/answer.yaml is stable. -->
+    <None Include="..\..\prompts\answer.yaml" Link="prompts\answer.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

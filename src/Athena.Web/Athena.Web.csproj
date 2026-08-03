@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- Same store as Athena.Ingestion/Athena.Eval: one 'dotnet user-secrets set' serves every
+         host (hard constraint 3 — keys live nowhere else). -->
+    <UserSecretsId>2fd374a8-4ad1-4156-8aae-b443af334762</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Athena.Core\Athena.Core.csproj" />
+    <ProjectReference Include="..\Athena.Agent\Athena.Agent.csproj" />
+    <ProjectReference Include="..\Athena.Filters\Athena.Filters.csproj" />
+    <ProjectReference Include="..\Athena.Plugins\Athena.Plugins.csproj" />
+    <ProjectReference Include="..\Athena.Retrieval\Athena.Retrieval.csproj" />
+    <ProjectReference Include="..\Athena.Recommendation\Athena.Recommendation.csproj" />
+    <ProjectReference Include="..\Athena.Ingestion\Athena.Ingestion.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SemanticKernel" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.InMemory" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" />
+  </ItemGroup>
+
+</Project>

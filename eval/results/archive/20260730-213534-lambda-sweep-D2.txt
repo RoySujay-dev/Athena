@@ -1,0 +1,67 @@
+more_like_this seeded on D2 (config: chunker=fixed;docvec=centroid)
+
+=== lambda = 1.0 ===
+1. Zero Trust Maturity Model v2.0 — CISA [D5] — score 0.52
+   Strong topical overlap on zero trust, federal regulations.
+   topics: zero trust, cybersecurity framework, federal regulations, maturity model, CISA guidelines
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.509*0.2 hits=0 bestRank=0
+2. NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29 [D1] — score 0.44
+   Strong topical overlap on nist guidelines.
+   topics: cybersecurity framework, risk management, nist guidelines, organizational profiles, cybersecurity governance
+   signals: docSim=0.647*0.5 chunkAgg=0.000*0.3 recency=0.589*0.2 hits=0 bestRank=0
+3. Digital Identity Guidelines: Authentication and Lifecycle Management — NIST SP 800-63B [D4] — score 0.38
+   Closely related to digital identity.
+   topics: digital identity, authentication guidelines, lifecycle management, federal standards, NIST publications
+   signals: docSim=0.632*0.5 chunkAgg=0.000*0.3 recency=0.325*0.2 hits=0 bestRank=0
+4. Computer Security Incident Handling Guide — NIST SP 800-61r2 [D3] — score 0.36
+   Strong topical overlap on cybersecurity, information security, NIST guidelines.
+   topics: incident response, cybersecurity, information security, NIST guidelines, risk management
+   signals: docSim=0.593*0.5 chunkAgg=0.000*0.3 recency=0.304*0.2 hits=0 bestRank=0
+5. Principles for Operational Resilience (final, Mar 2021) â€” BCBS d516 [A1] — score 0.32
+   Closely related to operational resilience. Supersedes A1-SCAN, Mar 2021. Supersedes A2, Aug 2020.
+   topics: operational resilience, banking regulation, risk management, business continuity, cyber security
+   signals: docSim=0.488*0.5 chunkAgg=0.000*0.3 recency=0.400*0.2 hits=0 bestRank=0
+
+=== lambda = 0.7 ===
+1. Zero Trust Maturity Model v2.0 — CISA [D5] — score 0.52
+   Strong topical overlap on zero trust, federal regulations.
+   topics: zero trust, cybersecurity framework, federal regulations, maturity model, CISA guidelines
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.509*0.2 hits=0 bestRank=0
+2. Digital Identity Guidelines: Authentication and Lifecycle Management — NIST SP 800-63B [D4] — score 0.38
+   Closely related to digital identity.
+   topics: digital identity, authentication guidelines, lifecycle management, federal standards, NIST publications
+   signals: docSim=0.632*0.5 chunkAgg=0.000*0.3 recency=0.325*0.2 hits=0 bestRank=0
+3. NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29 [D1] — score 0.44
+   Strong topical overlap on nist guidelines.
+   topics: cybersecurity framework, risk management, nist guidelines, organizational profiles, cybersecurity governance
+   signals: docSim=0.647*0.5 chunkAgg=0.000*0.3 recency=0.589*0.2 hits=0 bestRank=0
+4. Computer Security Incident Handling Guide — NIST SP 800-61r2 [D3] — score 0.36
+   Strong topical overlap on cybersecurity, information security, NIST guidelines.
+   topics: incident response, cybersecurity, information security, NIST guidelines, risk management
+   signals: docSim=0.593*0.5 chunkAgg=0.000*0.3 recency=0.304*0.2 hits=0 bestRank=0
+5. Han et al., Retrieval-Augmented Generation with Graphs (GraphRAG) [C3] — score 0.36
+   Closely related to retrieval-augmented generation.
+   topics: retrieval-augmented generation, graph-structured data, survey paper, machine learning, information retrieval
+   signals: docSim=0.437*0.5 chunkAgg=0.000*0.3 recency=0.696*0.2 hits=0 bestRank=0
+
+=== lambda = 0.3 ===
+1. Zero Trust Maturity Model v2.0 — CISA [D5] — score 0.52
+   Strong topical overlap on zero trust, federal regulations.
+   topics: zero trust, cybersecurity framework, federal regulations, maturity model, CISA guidelines
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.509*0.2 hits=0 bestRank=0
+2. Karpukhin et al., Dense Passage Retrieval for Open-Domain Question Answering [B2] — score 0.26
+   Closely related to dense passage retrieval.
+   topics: dense passage retrieval, open-domain question answering, machine learning, information retrieval, neural networks
+   signals: docSim=0.367*0.5 chunkAgg=0.000*0.3 recency=0.383*0.2 hits=0 bestRank=0
+3. FSI Executive Summary: Principles for operational resilience [A5] — score 0.33
+   Closely related to operational resilience.
+   topics: operational resilience, banking regulation, risk management, business continuity, third-party management
+   signals: docSim=0.467*0.5 chunkAgg=0.000*0.3 recency=0.472*0.2 hits=0 bestRank=0
+4. Digital Identity Guidelines: Authentication and Lifecycle Management — NIST SP 800-63B [D4] — score 0.38
+   Closely related to digital identity.
+   topics: digital identity, authentication guidelines, lifecycle management, federal standards, NIST publications
+   signals: docSim=0.632*0.5 chunkAgg=0.000*0.3 recency=0.325*0.2 hits=0 bestRank=0
+5. Computer Security Incident Handling Guide — NIST SP 800-61r2 [D3] — score 0.36
+   Strong topical overlap on cybersecurity, information security, NIST guidelines.
+   topics: incident response, cybersecurity, information security, NIST guidelines, risk management
+   signals: docSim=0.593*0.5 chunkAgg=0.000*0.3 recency=0.304*0.2 hits=0 bestRank=0

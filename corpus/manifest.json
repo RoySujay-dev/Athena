@@ -1,0 +1,164 @@
+{
+  "documents": [
+    {
+      "id": "A1",
+      "title": "Principles for Operational Resilience (final, Mar 2021) — BCBS d516",
+      "url": "https://www.bis.org/bcbs/publ/d516.pdf",
+      "cluster": "A",
+      "expectedPages": 20,
+      "publishedOn": "2021-03-31"
+    },
+    {
+      "id": "A2",
+      "title": "Principles for Operational Resilience (consultative draft, Aug 2020) — BCBS d509",
+      "url": "https://www.bis.org/bcbs/publ/d509.pdf",
+      "cluster": "A",
+      "expectedPages": 18,
+      "publishedOn": "2020-08-06"
+    },
+    {
+      "id": "A3",
+      "title": "Revisions to the Principles for the Sound Management of Operational Risk (final, Mar 2021) — BCBS d515",
+      "url": "https://www.bis.org/bcbs/publ/d515.pdf",
+      "cluster": "A",
+      "expectedPages": 30,
+      "publishedOn": "2021-03-31"
+    },
+    {
+      "id": "A4",
+      "title": "Revisions to the Principles for the Sound Management of Operational Risk (consultative draft, Aug 2020) — BCBS d508",
+      "url": "https://www.bis.org/bcbs/publ/d508.pdf",
+      "cluster": "A",
+      "expectedPages": 30,
+      "publishedOn": "2020-08-06"
+    },
+    {
+      "id": "A5",
+      "title": "FSI Executive Summary: Principles for operational resilience",
+      "url": "https://www.bis.org/fsi/fsisummaries/op_resilience.pdf",
+      "cluster": "A",
+      "expectedPages": 3,
+      "publishedOn": "2022-09-29"
+    },
+    {
+      "id": "B1",
+      "title": "Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://arxiv.org/pdf/2005.11401",
+      "cluster": "B",
+      "expectedPages": 19,
+      "publishedOn": "2021-04-12"
+    },
+    {
+      "id": "B2",
+      "title": "Karpukhin et al., Dense Passage Retrieval for Open-Domain Question Answering",
+      "url": "https://arxiv.org/pdf/2004.04906",
+      "cluster": "B",
+      "expectedPages": 13,
+      "publishedOn": "2020-09-30"
+    },
+    {
+      "id": "B3",
+      "title": "Gao et al., Retrieval-Augmented Generation for Large Language Models: A Survey",
+      "url": "https://arxiv.org/pdf/2312.10997",
+      "cluster": "B",
+      "expectedPages": 30,
+      "publishedOn": "2024-03-27"
+    },
+    {
+      "id": "B4",
+      "title": "Sarthi et al., RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+      "url": "https://arxiv.org/pdf/2401.18059",
+      "cluster": "B",
+      "expectedPages": 24,
+      "publishedOn": "2024-01-31"
+    },
+    {
+      "id": "B5",
+      "title": "Edge et al., From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+      "url": "https://arxiv.org/pdf/2404.16130",
+      "cluster": "B",
+      "expectedPages": 16,
+      "publishedOn": "2025-02-19"
+    },
+    {
+      "id": "C1",
+      "title": "Peng et al., Graph Retrieval-Augmented Generation: A Survey",
+      "url": "https://arxiv.org/pdf/2408.08921",
+      "cluster": "C",
+      "expectedPages": 25,
+      "publishedOn": "2024-09-10"
+    },
+    {
+      "id": "C2",
+      "title": "Guo et al., LightRAG: Simple and Fast Retrieval-Augmented Generation",
+      "url": "https://arxiv.org/pdf/2410.05779",
+      "cluster": "C",
+      "expectedPages": 18,
+      "publishedOn": "2025-04-28"
+    },
+    {
+      "id": "C3",
+      "title": "Han et al., Retrieval-Augmented Generation with Graphs (GraphRAG)",
+      "url": "https://arxiv.org/pdf/2501.00309",
+      "cluster": "C",
+      "expectedPages": 25,
+      "publishedOn": "2025-01-08"
+    },
+    {
+      "id": "C4",
+      "title": "Es et al., RAGAS: Automated Evaluation of Retrieval Augmented Generation (v1)",
+      "url": "https://arxiv.org/pdf/2309.15217v1",
+      "cluster": "C",
+      "expectedPages": 6,
+      "publishedOn": "2023-09-26"
+    },
+    {
+      "id": "C5",
+      "title": "Es et al., RAGAS: Automated Evaluation of Retrieval Augmented Generation (v2)",
+      "url": "https://arxiv.org/pdf/2309.15217v2",
+      "cluster": "C",
+      "expectedPages": 7,
+      "publishedOn": "2025-04-28"
+        },
+    {
+      "id": "D1",
+      "title": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "cluster": "D",
+      "expectedPages": 32,
+      "publishedOn": "2024-02-26"
+    },
+    {
+      "id": "D2",
+      "title": "Zero Trust Architecture — NIST SP 800-207",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf",
+      "cluster": "D",
+      "expectedPages": 59,
+      "publishedOn": "2020-08-11"
+    },
+    {
+      "id": "D3",
+      "title": "Computer Security Incident Handling Guide — NIST SP 800-61r2",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf",
+      "cluster": "D",
+      "expectedPages": 79,
+      "publishedOn": "2012-08-06"
+    },
+    {
+      "id": "D4",
+      "title": "Digital Identity Guidelines: Authentication and Lifecycle Management — NIST SP 800-63B",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63b.pdf",
+      "cluster": "D",
+      "expectedPages": 79,
+      "publishedOn": "2017-06-22"
+    },
+    {
+      "id": "D5",
+      "title": "Zero Trust Maturity Model v2.0 — CISA",
+      "url": "https://www.cisa.gov/sites/default/files/2023-04/zero_trust_maturity_model_v2_508.pdf",
+      "cluster": "D",
+      "expectedPages": 39,
+      "publishedOn": "2023-04-11"
+    }
+  ]
+}

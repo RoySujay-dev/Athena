@@ -1,0 +1,278 @@
+@page "/"
+@using System.Text.RegularExpressions
+@using Athena.Retrieval
+@using Athena.Web.Services
+@using Rec = Athena.Recommendation.Recommendation
+@implements IDisposable
+@inject CorpusService Corpus
+@inject ChatSession Session
+@inject IJSRuntime JS
+
+<PageTitle>Athena — Research Librarian</PageTitle>
+
+<div class="athena">
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-name">Athena</span>
+            <span class="brand-sub">grounded research librarian</span>
+        </div>
+        <div class="metrics-strip">
+            @if (LastMetrics is { HasAny: true } m)
+            {
+                <span class="metric"><span class="metric-label">last turn</span> @FormatLatency(m.LatencyMs)</span>
+                <span class="metric"><span class="metric-label">tokens</span> @m.InputTokens.ToString("N0") in / @m.OutputTokens.ToString("N0") out</span>
+                <span class="metric"><span class="metric-label">est. cost</span> @(m.CostUsd is { } c ? c.ToString("$0.00##") : "n/a")</span>
+                <span class="metric trace">@string.Join(" → ", m.Functions)</span>
+            }
+            else if (LastMetrics is not null)
+            {
+                <span class="metric muted">last turn: no function call</span>
+            }
+            else
+            {
+                <span class="metric muted">metrics appear after your first question</span>
+            }
+        </div>
+        <div class="status @StatusClass">@StatusText</div>
+    </header>
+
+    <div class="body">
+        <main class="chat">
+            <div class="chat-scroll">
+                <div class="chat-inner">
+                    @if (Session.Turns.Count == 0)
+                    {
+                        <div class="empty-hint">
+                            <p>Ask about the library — Basel operational resilience, RAG architecture
+                               and evaluation, zero-trust guidance.</p>
+                            <p class="muted">Answers cite [Title, p.N]; click a citation to see the retrieved chunk.</p>
+                            @if (_ingestedDocs == 0 && _error is null)
+                            {
+                                <p class="warn-hint">No documents are ingested yet — select and ingest
+                                   some on the <a href="corpus">Corpus</a> tab first, or every answer
+                                   will come back empty.</p>
+                            }
+                        </div>
+                    }
+                    @foreach (var (turn, turnIndex) in Session.Turns.Select((t, i) => (t, i)))
+                    {
+                        <div class="msg user"><div class="bubble">@turn.User</div></div>
+                        <div class="msg assistant">
+                            <div class="bubble @(turn.IsComplete ? "done" : "")">
+                                @if (turn.IsComplete)
+                                {
+                                    @foreach (var (segment, segmentIndex) in Segments(turn.Assistant).Select((s, i) => (s, i)))
+                                    {
+                                        @if (segment.Citation is { } citation)
+                                        {
+                                            <button class="citation @(IsExpanded(turnIndex, segmentIndex) ? "open" : "")"
+                                                    @onclick="() => ToggleCitation(turnIndex, segmentIndex)">
+                                                [@citation.Title, p.@citation.Page]
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <span class="msg-text">@segment.Text</span>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="msg-text">@turn.Assistant</span><span class="cursor">▍</span>
+                                }
+                            </div>
+                            @foreach (var (segment, segmentIndex) in Segments(turn.Assistant).Select((s, i) => (s, i)))
+                            {
+                                @if (turn.IsComplete && segment.Citation is { } citation && IsExpanded(turnIndex, segmentIndex))
+                                {
+                                    <div class="citation-panel">
+                                        <div class="citation-panel-head">[@citation.Title, p.@citation.Page]</div>
+                                        @{ var matches = MatchPassages(turn, citation); }
+                                        @if (matches.Count == 0)
+                                        {
+                                            <p class="muted">No retrieved chunk from this turn matches this citation
+                                               — that is exactly what the grounding guard flags.</p>
+                                        }
+                                        @foreach (Passage passage in matches)
+                                        {
+                                            <div class="chunk">
+                                                <div class="chunk-meta">@passage.DocId · p.@passage.PageNumber@(passage.EndPage > passage.PageNumber ? $"–{passage.EndPage}" : "") · score @passage.Score.ToString("0.000")</div>
+                                                <div class="chunk-text">@passage.Text</div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                            @if (turn.IsComplete && turn.Metrics is { HasAny: true } tm)
+                            {
+                                <div class="msg-footer">@string.Join(" → ", tm.Functions) · @FormatLatency(tm.LatencyMs) · @((tm.InputTokens + tm.OutputTokens).ToString("N0")) tokens@(tm.CostUsd is { } tc ? $" · {tc:$0.00##}" : "")</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <form class="composer" @onsubmit="SendAsync" @onsubmit:preventDefault>
+                <input class="composer-input" @bind="_draft" @bind:event="oninput"
+                       placeholder="@(Ready ? "Ask the librarian…" : "Unavailable — check secrets/corpus")"
+                       disabled="@(!Ready || Session.IsStreaming)" />
+                <button class="composer-send" type="submit"
+                        disabled="@(!Ready || Session.IsStreaming || string.IsNullOrWhiteSpace(_draft))">
+                    Send
+                </button>
+            </form>
+        </main>
+
+        <aside class="sidebar">
+            <h2>Recommended for you</h2>
+            @if (Session.Recommendations.Count == 0)
+            {
+                <p class="muted">Ask a question and reading suggestions tuned to your session
+                   will appear here.</p>
+            }
+            @foreach (Rec rec in Session.Recommendations)
+            {
+                <div class="rec-card">
+                    <div class="rec-title">@rec.Title</div>
+                    <div class="rec-meta">@rec.DocId · score @rec.Score.ToString("0.00")</div>
+                    <div class="rec-reason">@rec.Reason</div>
+                    <div class="rec-topics">
+                        @foreach (string topic in rec.Topics.Take(4))
+                        {
+                            <span class="topic">@topic</span>
+                        }
+                    </div>
+                </div>
+            }
+        </aside>
+    </div>
+</div>
+
+@code {
+    private string _draft = string.Empty;
+    private string? _error;
+    private int _ingestedDocs;
+    private readonly HashSet<(int Turn, int Segment)> _expanded = [];
+
+    private bool Ready => _error is null;
+
+    private TurnMetrics? LastMetrics => Session.Turns.LastOrDefault(t => t.IsComplete)?.Metrics;
+
+    private string StatusText => _error is not null ? "unavailable"
+        : _ingestedDocs > 0 ? $"{_ingestedDocs} docs indexed"
+        : "no docs ingested";
+
+    private string StatusClass => _error is not null ? "err" : _ingestedDocs > 0 ? "ok" : "busy";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Corpus.Changed += OnCorpusChanged;
+        try
+        {
+            Session.Initialize();
+            await RefreshDocCountAsync();
+        }
+        catch (Exception ex)
+        {
+            _error = Corpus.FailureReason ?? ex.GetBaseException().Message;
+        }
+    }
+
+    private async Task RefreshDocCountAsync()
+    {
+        _ingestedDocs = (await Corpus.GetStatusAsync()).Count(r => r.Ingested);
+    }
+
+    private void OnCorpusChanged() => _ = InvokeAsync(async () =>
+    {
+        await RefreshDocCountAsync();
+        StateHasChanged();
+    });
+
+    public void Dispose() => Corpus.Changed -= OnCorpusChanged;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+        // Idempotent (data-math-done guard in the script), so calling on every render is safe
+        // and catches each newly completed bubble exactly once.
+        => await JS.InvokeVoidAsync("athenaRenderMath");
+
+    private async Task SendAsync()
+    {
+        string text = _draft.Trim();
+        if (text.Length == 0 || !Ready || Session.IsStreaming)
+        {
+            return;
+        }
+
+        _draft = string.Empty;
+        await Session.SendAsync(text, () => InvokeAsync(StateHasChanged));
+    }
+
+    private void ToggleCitation(int turnIndex, int segmentIndex)
+    {
+        if (!_expanded.Remove((turnIndex, segmentIndex)))
+        {
+            _expanded.Add((turnIndex, segmentIndex));
+        }
+    }
+
+    private bool IsExpanded(int turnIndex, int segmentIndex)
+        => _expanded.Contains((turnIndex, segmentIndex));
+
+    private static string FormatLatency(double ms)
+        => ms >= 1000 ? $"{ms / 1000:0.0} s" : $"{ms:0} ms";
+
+    // --- citation parsing (display-only; routing never reads user text — hard constraint 1) ---
+
+    private readonly record struct Citation(string Title, int Page);
+
+    private readonly record struct Segment(string Text, Citation? Citation);
+
+    // The answer prompt's citation contract: [Title, p.N]. Title excludes brackets/newlines so
+    // a stray '[' cannot swallow half the answer.
+    private static readonly Regex CitationPattern = new(
+        @"\[([^\[\]\r\n]+?),\s*p\.\s*(\d+)\]", RegexOptions.Compiled);
+
+    private static IReadOnlyList<Segment> Segments(string text)
+    {
+        var segments = new List<Segment>();
+        int position = 0;
+        foreach (Match match in CitationPattern.Matches(text))
+        {
+            if (match.Index > position)
+            {
+                segments.Add(new Segment(text[position..match.Index], null));
+            }
+
+            segments.Add(new Segment(match.Value,
+                new Citation(match.Groups[1].Value.Trim(), int.Parse(match.Groups[2].Value))));
+            position = match.Index + match.Length;
+        }
+
+        if (position < text.Length)
+        {
+            segments.Add(new Segment(text[position..], null));
+        }
+
+        return segments;
+    }
+
+    /// <summary>
+    /// Chunks from THIS turn's retrieval that back the clicked citation: title match plus the
+    /// cited page inside the chunk's page span. Title fallback is contains() both ways because
+    /// the model may cite a shortened title.
+    /// </summary>
+    private static IReadOnlyList<Passage> MatchPassages(ChatTurn turn, Citation citation)
+    {
+        bool TitleMatches(Passage p)
+            => string.Equals(p.Title, citation.Title, StringComparison.OrdinalIgnoreCase)
+               || p.Title.Contains(citation.Title, StringComparison.OrdinalIgnoreCase)
+               || citation.Title.Contains(p.Title, StringComparison.OrdinalIgnoreCase);
+
+        bool PageMatches(Passage p)
+            => citation.Page >= p.PageNumber && citation.Page <= Math.Max(p.PageNumber, p.EndPage);
+
+        var matches = turn.Passages.Where(p => TitleMatches(p) && PageMatches(p)).ToList();
+        return matches.Count > 0 ? matches : turn.Passages.Where(TitleMatches).ToList();
+    }
+}

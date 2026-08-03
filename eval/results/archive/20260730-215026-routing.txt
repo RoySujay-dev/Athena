@@ -1,0 +1,31 @@
+﻿Part E routing table — six §10 utterances (config: chunker=fixed;docvec=centroid)
+
+[1] "What does d516 say about tolerance for disruption?"
+    expected : answer_question
+    resolved : answer_question
+    response : The document d516 defines tolerance for disruption as the level of disruption from any type of operational risk that a bank is willing to accept, considering a range of severe but plausible scenarios. It emphasizes that ...
+
+[2] "What else should I read?"
+    expected : recommend_for_user
+    resolved : recommend_for_user
+    response : Here are some recommended readings based on your interest in operational resilience and related topics:  1. **Computer Security Incident Handling Guide — NIST SP 800-61r2**      This guide focuses on incident response, w...
+
+[3] "Give me papers like the RAPTOR one."
+    expected : more_like_this
+    resolved : more_like_this
+    response : I couldn't find a document titled "RAPTOR" in the library. If you have another specific document in mind or a different topic you'd like to explore, please let me know!
+
+[4] "What should I read about evaluating RAG systems?"
+    expected : recommend_for_query
+    resolved : recommend_for_query
+    response : Here are some recommended readings on evaluating retrieval-augmented generation (RAG) systems:  1. **Guo et al., LightRAG: Simple and Fast Retrieval-Augmented Generation**      This paper discusses retrieval-augmented ge...
+
+[5] "Summarise how graph-based RAG differs from vanilla RAG, and point me at further reading."
+    expected : answer_question + a recommender, both in one turn
+    resolved : answer_question -> recommend_for_query
+    response : Graph-based RAG, or GraphRAG, differs from vanilla RAG primarily in its capability to handle queries that require a global understanding of an entire dataset. While traditional RAG methods, referred to as vector RAG, exc...
+
+[6] "Who won the 2019 Cricket World Cup?"
+    expected : no function call (out of scope)
+    resolved : (no function call)
+    response : I'm sorry, but I cannot provide information on the 2019 Cricket World Cup as it falls outside the scope of the library's coverage. If you have questions related to banking operational resilience, operational-risk regulat...

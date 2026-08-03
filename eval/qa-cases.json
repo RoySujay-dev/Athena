@@ -1,0 +1,180 @@
+{
+  "_comment": "QA gold set for the Part F harness (brief §11.1): 25 hand-written cases — 20 answerable, 5 unanswerable. Page numbers are PHYSICAL PDF pages (what Azure DI returns and what ChunkRecord.PageNumber carries), each verified against per-page extracted text of the corpus PDF. Cluster D (NIST/CISA zero-trust and cybersecurity) contributes 5 answerable cases so the set is not tuned solely against clusters the author authored questions for. Draft-vs-final catches: qa02 (answer differs between A1 final and A2 draft), qa05 (answerable only from the A2 consultative draft), qa20 (answerable only from the A4 consultative draft) — covering both the A1/A2 and A3/A4 lineage pairs.",
+  "cases": [
+    {
+      "question": "How does the Basel Committee define operational resilience?",
+      "expectedAnswer": "The ability of a bank to deliver critical operations through disruption.",
+      "goldDocId": "A1",
+      "goldPages": [7],
+      "isAnswerable": true
+    },
+    {
+      "question": "According to the final Principles for operational resilience, banks' response and recovery plans should manage incidents in line with what?",
+      "expectedAnswer": "In line with the bank's risk appetite and tolerance for disruption (the consultative draft said only 'risk tolerance for disruption').",
+      "goldDocId": "A1",
+      "goldPages": [11],
+      "isAnswerable": true
+    },
+    {
+      "question": "What does Principle 6 of the Principles for operational resilience require banks to develop and implement?",
+      "expectedAnswer": "Response and recovery plans to manage incidents that could disrupt the delivery of critical operations, continuously improved by incorporating lessons learned from previous incidents.",
+      "goldDocId": "A1",
+      "goldPages": [11],
+      "isAnswerable": true
+    },
+    {
+      "question": "Which principle of the revised Principles for the Sound Management of Operational Risk addresses ICT risk management?",
+      "expectedAnswer": "Principle 10: banks should implement a robust ICT risk management programme in alignment with their operational risk management framework.",
+      "goldDocId": "A3",
+      "goldPages": [20],
+      "isAnswerable": true
+    },
+    {
+      "question": "By what date were comments requested on the consultative document Principles for operational resilience?",
+      "expectedAnswer": "By 6 November 2020.",
+      "goldDocId": "A2",
+      "goldPages": [1],
+      "isAnswerable": true
+    },
+    {
+      "question": "According to the executive summary, what earlier principles do the Principles for operational resilience build on?",
+      "expectedAnswer": "The Basel Committee's Principles for the sound management of operational risk (PSMOR), originally issued in 2011 and revised in 2014 and 2021.",
+      "goldDocId": "A5",
+      "goldPages": [1],
+      "isAnswerable": true
+    },
+    {
+      "question": "What is the difference between the RAG-Sequence and RAG-Token models?",
+      "expectedAnswer": "RAG-Sequence uses the same retrieved document to generate the complete sequence, treating it as a single marginalised latent variable; RAG-Token can draw on a different retrieved document for each generated token.",
+      "goldDocId": "B1",
+      "goldPages": [3],
+      "isAnswerable": true
+    },
+    {
+      "question": "By how much does Dense Passage Retrieval outperform Lucene-BM25 in top-20 passage retrieval accuracy?",
+      "expectedAnswer": "By 9%-19% absolute.",
+      "goldDocId": "B2",
+      "goldPages": [1],
+      "isAnswerable": true
+    },
+    {
+      "question": "What are the three developmental paradigms of RAG described in the RAG survey?",
+      "expectedAnswer": "Naive RAG, Advanced RAG, and Modular RAG.",
+      "goldDocId": "B3",
+      "goldPages": [1, 3, 4],
+      "isAnswerable": true
+    },
+    {
+      "question": "What clustering approach does RAPTOR use to group text chunks before summarisation?",
+      "expectedAnswer": "Soft clustering based on Gaussian Mixture Models, with UMAP dimensionality reduction.",
+      "goldDocId": "B4",
+      "goldPages": [3, 4],
+      "isAnswerable": true
+    },
+    {
+      "question": "Which community detection algorithm does GraphRAG use to partition the entity knowledge graph?",
+      "expectedAnswer": "The Leiden algorithm.",
+      "goldDocId": "B5",
+      "goldPages": [4, 5],
+      "isAnswerable": true
+    },
+    {
+      "question": "Into which three stages does the GraphRAG survey organise the GraphRAG process?",
+      "expectedAnswer": "Graph-Based Indexing (G-Indexing), Graph-Guided Retrieval (G-Retrieval), and Graph-Enhanced Generation (G-Generation).",
+      "goldDocId": "C1",
+      "goldPages": [3, 4],
+      "isAnswerable": true
+    },
+    {
+      "question": "What kind of retrieval system does LightRAG employ?",
+      "expectedAnswer": "A dual-level retrieval system covering both low-level and high-level knowledge discovery, integrating graph structures with vector representations.",
+      "goldDocId": "C2",
+      "goldPages": [1, 2],
+      "isAnswerable": true
+    },
+    {
+      "question": "Which three quality aspects does RAGAS evaluate for a RAG pipeline?",
+      "expectedAnswer": "Faithfulness, answer relevance, and context relevance.",
+      "goldDocId": "C4",
+      "goldPages": [3],
+      "isAnswerable": true
+    },
+    {
+      "question": "What are the six Functions of the NIST Cybersecurity Framework 2.0 Core?",
+      "expectedAnswer": "GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER.",
+      "goldDocId": "D1",
+      "goldPages": [8, 9],
+      "isAnswerable": true
+    },
+    {
+      "question": "What is the first tenet of zero trust listed in NIST SP 800-207?",
+      "expectedAnswer": "All data sources and computing services are considered resources.",
+      "goldDocId": "D2",
+      "goldPages": [15],
+      "isAnswerable": true
+    },
+    {
+      "question": "What are the phases of the incident response life cycle in the NIST computer security incident handling guide?",
+      "expectedAnswer": "Preparation; Detection and Analysis; Containment, Eradication and Recovery; and Post-Incident Activity.",
+      "goldDocId": "D3",
+      "goldPages": [31],
+      "isAnswerable": true
+    },
+    {
+      "question": "What minimum length does NIST SP 800-63B require for memorized secrets chosen by the subscriber?",
+      "expectedAnswer": "At least 8 characters; memorized secrets chosen randomly by the CSP or verifier must be at least 6 characters.",
+      "goldDocId": "D4",
+      "goldPages": [24],
+      "isAnswerable": true
+    },
+    {
+      "question": "What are the five pillars of the CISA Zero Trust Maturity Model?",
+      "expectedAnswer": "Identity, Devices, Networks, Applications and Workloads, and Data — each supported by the cross-cutting capabilities Visibility and Analytics, Automation and Orchestration, and Governance.",
+      "goldDocId": "D5",
+      "goldPages": [6],
+      "isAnswerable": true
+    },
+    {
+      "question": "By what date should comments on the consultative document Revisions to the principles for the sound management of operational risk be submitted?",
+      "expectedAnswer": "By 6 November 2020.",
+      "goldDocId": "A4",
+      "goldPages": [1, 6],
+      "isAnswerable": true
+    },
+    {
+      "question": "What capital requirements does Basel III set for credit risk-weighted assets?",
+      "expectedAnswer": "INSUFFICIENT_CONTEXT",
+      "goldDocId": "",
+      "goldPages": [],
+      "isAnswerable": false
+    },
+    {
+      "question": "How does the SPLADE model expand sparse query representations?",
+      "expectedAnswer": "INSUFFICIENT_CONTEXT",
+      "goldDocId": "",
+      "goldPages": [],
+      "isAnswerable": false
+    },
+    {
+      "question": "What obligations does the EU AI Act impose on providers of high-risk AI systems?",
+      "expectedAnswer": "INSUFFICIENT_CONTEXT",
+      "goldDocId": "",
+      "goldPages": [],
+      "isAnswerable": false
+    },
+    {
+      "question": "What does PCI DSS require for the storage of cardholder data?",
+      "expectedAnswer": "INSUFFICIENT_CONTEXT",
+      "goldDocId": "",
+      "goldPages": [],
+      "isAnswerable": false
+    },
+    {
+      "question": "How does Kubernetes Pod Security Admission enforce baseline and restricted policies?",
+      "expectedAnswer": "INSUFFICIENT_CONTEXT",
+      "goldDocId": "",
+      "goldPages": [],
+      "isAnswerable": false
+    }
+  ]
+}

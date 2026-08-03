@@ -1,0 +1,192 @@
+@page "/corpus"
+@using Athena.Ingestion
+@using Athena.Web.Services
+@implements IDisposable
+@inject CorpusService Service
+
+<PageTitle>Athena — Corpus setup</PageTitle>
+
+<div class="corpus">
+    <header class="corpus-head">
+        <h1>Corpus setup</h1>
+        <p class="muted">Select documents, then fetch (download missing PDFs) or ingest (extract →
+           chunk → summarise → embed) only those rows. A document's scanned variant travels with it.</p>
+    </header>
+
+    @if (Service.FailureReason is { } failure)
+    {
+        <div class="alert">@failure</div>
+    }
+    else
+    {
+        <div class="toolbar">
+            <span>@_selected.Count / @_rows.Count selected</span>
+            <button @onclick="SelectAll" disabled="@(_busy || _selected.Count == _rows.Count)">Select all</button>
+            <button @onclick="() => _selected.Clear()" disabled="@(_busy || _selected.Count == 0)">Unselect all</button>
+            <button @onclick="RefreshAsync" disabled="@_busy">Refresh status</button>
+            <span class="spacer"></span>
+            <button class="primary" @onclick="FetchAsync" disabled="@(_busy || _selected.Count == 0)">Fetch selected</button>
+            <button class="primary" @onclick="IngestAsync" disabled="@(_busy || _selected.Count == 0)">Ingest selected</button>
+        </div>
+
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Doc</th>
+                    <th>Title</th>
+                    <th>Cluster</th>
+                    <th>PDF</th>
+                    <th>Ingested</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CorpusDocStatus row in _rows)
+                {
+                    <tr class="@(_selected.Contains(row.DocId) ? "sel" : "")">
+                        <td>
+                            <input type="checkbox" checked="@_selected.Contains(row.DocId)"
+                                   disabled="@_busy"
+                                   @onchange="e => Toggle(row.DocId, (bool)e.Value!)" />
+                        </td>
+                        <td class="mono">@row.DocId@(row.HasScannedVariant ? " (+scan)" : "")</td>
+                        <td>@row.Title</td>
+                        <td>@row.Cluster</td>
+                        <td>
+                            @if (row.PdfPresent)
+                            {
+                                <span class="badge ok">present · @((row.PdfBytes / 1024.0).ToString("N0")) KB</span>
+                            }
+                            else
+                            {
+                                <span class="badge warn">missing</span>
+                            }
+                        </td>
+                        <td>
+                            @if (row.Ingested)
+                            {
+                                <span class="badge ok">@row.ChunkCount chunks</span>
+                            }
+                            else
+                            {
+                                <span class="badge">not ingested</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (_busy)
+        {
+            <div class="progress">@_busyText</div>
+        }
+        @if (_messages.Count > 0)
+        {
+            <div class="report">
+                @foreach (string message in _messages)
+                {
+                    <div>@message</div>
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private IReadOnlyList<CorpusDocStatus> _rows = [];
+    private readonly HashSet<string> _selected = new(StringComparer.Ordinal);
+    private bool _busy;
+    private string _busyText = string.Empty;
+    private List<string> _messages = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        Service.Changed += OnCorpusChanged;
+        await RefreshAsync();
+    }
+
+    private async Task RefreshAsync()
+    {
+        _rows = await Service.GetStatusAsync();
+        _selected.IntersectWith(_rows.Select(r => r.DocId));
+    }
+
+    private void SelectAll()
+    {
+        foreach (CorpusDocStatus row in _rows)
+        {
+            _selected.Add(row.DocId);
+        }
+    }
+
+    private void Toggle(string docId, bool on)
+    {
+        if (on)
+        {
+            _selected.Add(docId);
+        }
+        else
+        {
+            _selected.Remove(docId);
+        }
+    }
+
+    private async Task FetchAsync()
+    {
+        _busy = true;
+        _busyText = $"Fetching {_selected.Count} document(s)…";
+        _messages = [];
+        try
+        {
+            IReadOnlyList<string> result = await Service.FetchAsync(_selected.ToList());
+            _messages = result.Count == 0 ? ["All selected PDFs were already present."] : result.ToList();
+        }
+        catch (Exception ex)
+        {
+            _messages = [$"Fetch failed: {ex.GetBaseException().Message}"];
+        }
+        finally
+        {
+            _busy = false;
+            await RefreshAsync();
+        }
+    }
+
+    private async Task IngestAsync()
+    {
+        _busy = true;
+        _busyText = $"Ingesting {_selected.Count} document(s) — extract, chunk, summarise, embed. " +
+                    "First run per document calls Azure DI and OpenAI; warm caches make re-runs fast.";
+        _messages = [];
+        StateHasChanged();
+        try
+        {
+            IngestionReport report = await Service.IngestAsync(_selected.ToList());
+            _messages =
+            [
+                $"Ingested {report.DocumentsProcessed} document(s): {report.ChunksWritten} chunks, " +
+                $"{report.PagesOcrd} OCR pages, {report.TablesExtracted} tables, " +
+                $"in {report.Elapsed.TotalSeconds:0.0} s.",
+                .. report.Warnings,
+            ];
+        }
+        catch (Exception ex)
+        {
+            _messages = [$"Ingestion failed: {ex.GetBaseException().Message}"];
+        }
+        finally
+        {
+            _busy = false;
+            await RefreshAsync();
+        }
+    }
+
+    private void OnCorpusChanged() => _ = InvokeAsync(async () =>
+    {
+        await RefreshAsync();
+        StateHasChanged();
+    });
+
+    public void Dispose() => Service.Changed -= OnCorpusChanged;
+}

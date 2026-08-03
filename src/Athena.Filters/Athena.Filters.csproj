@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Athena.Core\Athena.Core.csproj" />
+    <!-- The grounding guard validates citations against the Passage set the retriever
+         actually produced this turn (IRetrievedContextAccessor). -->
+    <ProjectReference Include="..\Athena.Retrieval\Athena.Retrieval.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pure citation parsing/stripping helpers are unit-tested directly. -->
+    <InternalsVisibleTo Include="Athena.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SemanticKernel" />
+  </ItemGroup>
+
+</Project>

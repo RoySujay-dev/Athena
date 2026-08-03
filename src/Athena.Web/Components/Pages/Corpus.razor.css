@@ -1,0 +1,117 @@
+.corpus {
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1.3rem 1.8rem;
+    background: #f4f6f9;
+    color: #1c2430;
+}
+
+.corpus-head h1 {
+    margin: 0 0 0.3rem;
+    font-size: 1.4rem;
+}
+
+.muted {
+    color: #5b6675;
+    font-size: 0.88rem;
+}
+
+.alert {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    background: #fdecea;
+    color: #8a2018;
+    border: 1px solid #f2b8b2;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0.8rem;
+    font-size: 0.85rem;
+    color: #5b6675;
+}
+
+.toolbar .spacer { flex: 1; }
+
+.toolbar button {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid #c7d0dd;
+    border-radius: 0.45rem;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.toolbar button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.toolbar button.primary {
+    background: #2a5bd7;
+    border-color: #2a5bd7;
+    color: #fff;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #dde3ec;
+    border-radius: 0.5rem;
+    font-size: 0.88rem;
+}
+
+.doc-table th {
+    text-align: left;
+    padding: 0.55rem 0.7rem;
+    background: #eef1f6;
+    color: #5b6675;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.doc-table td {
+    padding: 0.5rem 0.7rem;
+    border-top: 1px solid #eef1f6;
+}
+
+.doc-table tr.sel td { background: #f2f6ff; }
+
+.mono { font-family: Consolas, monospace; }
+
+.badge {
+    display: inline-block;
+    padding: 0.12rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: #eef1f6;
+    color: #5b6675;
+}
+
+.badge.ok { background: #e2f5e9; color: #1e7a41; }
+.badge.warn { background: #fdf3dc; color: #8a6d1a; }
+
+.progress {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    background: #e8effc;
+    color: #24427e;
+    font-size: 0.88rem;
+}
+
+.report {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    background: #fff;
+    border: 1px solid #dde3ec;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-family: Consolas, monospace;
+}

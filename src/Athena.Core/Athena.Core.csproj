@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Athena.Core is deliberately dependency-light: it references neither Semantic Kernel nor
+       any Azure package (design constraint 5). Records, abstractions, and options
+       POCOs only. If a type here needs an SK or Azure type, it belongs in another project.
+       The single permitted package is Microsoft.Extensions.VectorData.Abstractions, the
+       attribute set the brief's own ChunkRecord skeleton (§6.1) uses; it is a Microsoft
+       Extensions abstraction, not SK and not Azure. -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" />
+  </ItemGroup>
+
+</Project>

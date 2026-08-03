@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Pure functions only (MMR, dedup, scoring, interest profile). No SK dependency, so the
+       recommendation logic is unit-testable without a live model. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Athena.Core\Athena.Core.csproj" />
+    <!-- The brief's IRecommendationScorer signature (§9.3) takes the retriever's Passage for
+         chunk-hit aggregation. Reference is for that type only — no SK types are used here,
+         and everything stays unit-testable without a model. -->
+    <ProjectReference Include="..\Athena.Retrieval\Athena.Retrieval.csproj" />
+  </ItemGroup>
+
+</Project>

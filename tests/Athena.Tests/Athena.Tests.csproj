@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Athena.Core\Athena.Core.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Ingestion\Athena.Ingestion.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Retrieval\Athena.Retrieval.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Eval\Athena.Eval.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Plugins\Athena.Plugins.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Filters\Athena.Filters.csproj" />
+    <ProjectReference Include="..\..\src\Athena.Recommendation\Athena.Recommendation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Athena.Core\Athena.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pure internal helpers (reranker JSON parsing) are unit-tested directly without
+         widening the public surface. -->
+    <InternalsVisibleTo Include="Athena.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+    <PackageReference Include="Lucene.Net" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" />
+    <!-- The reranker is a prompt function per the brief (§7); Core stays SK-free, Retrieval
+         may reference SK. -->
+    <PackageReference Include="Microsoft.SemanticKernel" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" />
+  </ItemGroup>
+
+</Project>

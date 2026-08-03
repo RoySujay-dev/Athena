@@ -1,0 +1,67 @@
+more_like_this seeded on B3 (config: chunker=fixed;docvec=centroid)
+
+=== lambda = 1.0 ===
+1. Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks [B1] — score 0.54
+   Strong topical overlap on retrieval-augmented generation, natural language processing.
+   topics: retrieval-augmented generation, natural language processing, knowledge-intensive tasks, question answering, fact verification
+   signals: docSim=0.912*0.5 chunkAgg=0.000*0.3 recency=0.401*0.2 hits=0 bestRank=0
+2. Peng et al., Graph Retrieval-Augmented Generation: A Survey [C1] — score 0.58
+   Strong topical overlap on large language models, information retrieval.
+   topics: graph retrieval, augmented generation, large language models, knowledge graphs, information retrieval
+   signals: docSim=0.893*0.5 chunkAgg=0.000*0.3 recency=0.651*0.2 hits=0 bestRank=0
+3. Guo et al., LightRAG: Simple and Fast Retrieval-Augmented Generation [C2] — score 0.58
+   Strong topical overlap on retrieval-augmented generation, information retrieval.
+   topics: retrieval-augmented generation, graph structures, information retrieval, contextual awareness, machine learning
+   signals: docSim=0.859*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0
+4. Edge et al., From Local to Global: A Graph RAG Approach to Query-Focused Summarization [B5] — score 0.56
+   Strong topical overlap on retrieval-augmented generation.
+   topics: query-focused summarization, retrieval-augmented generation, knowledge graphs, graph-based methods, global sensemaking
+   signals: docSim=0.833*0.5 chunkAgg=0.000*0.3 recency=0.713*0.2 hits=0 bestRank=0
+5. Es et al., RAGAS: Automated Evaluation of Retrieval Augmented Generation (v2) [C5] — score 0.56
+   Strong topical overlap on retrieval-augmented generation. Supersedes C4, Sep 2023.
+   topics: retrieval-augmented generation, evaluation framework, automated assessment, language models, machine learning
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0
+
+=== lambda = 0.7 ===
+1. Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks [B1] — score 0.54
+   Strong topical overlap on retrieval-augmented generation, natural language processing.
+   topics: retrieval-augmented generation, natural language processing, knowledge-intensive tasks, question answering, fact verification
+   signals: docSim=0.912*0.5 chunkAgg=0.000*0.3 recency=0.401*0.2 hits=0 bestRank=0
+2. Peng et al., Graph Retrieval-Augmented Generation: A Survey [C1] — score 0.58
+   Strong topical overlap on large language models, information retrieval.
+   topics: graph retrieval, augmented generation, large language models, knowledge graphs, information retrieval
+   signals: docSim=0.893*0.5 chunkAgg=0.000*0.3 recency=0.651*0.2 hits=0 bestRank=0
+3. Guo et al., LightRAG: Simple and Fast Retrieval-Augmented Generation [C2] — score 0.58
+   Strong topical overlap on retrieval-augmented generation, information retrieval.
+   topics: retrieval-augmented generation, graph structures, information retrieval, contextual awareness, machine learning
+   signals: docSim=0.859*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0
+4. Es et al., RAGAS: Automated Evaluation of Retrieval Augmented Generation (v2) [C5] — score 0.56
+   Strong topical overlap on retrieval-augmented generation. Supersedes C4, Sep 2023.
+   topics: retrieval-augmented generation, evaluation framework, automated assessment, language models, machine learning
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0
+5. Edge et al., From Local to Global: A Graph RAG Approach to Query-Focused Summarization [B5] — score 0.56
+   Strong topical overlap on retrieval-augmented generation.
+   topics: query-focused summarization, retrieval-augmented generation, knowledge graphs, graph-based methods, global sensemaking
+   signals: docSim=0.833*0.5 chunkAgg=0.000*0.3 recency=0.713*0.2 hits=0 bestRank=0
+
+=== lambda = 0.3 ===
+1. Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks [B1] — score 0.54
+   Strong topical overlap on retrieval-augmented generation, natural language processing.
+   topics: retrieval-augmented generation, natural language processing, knowledge-intensive tasks, question answering, fact verification
+   signals: docSim=0.912*0.5 chunkAgg=0.000*0.3 recency=0.401*0.2 hits=0 bestRank=0
+2. FSI Executive Summary: Principles for operational resilience [A5] — score 0.23
+   Closely related to operational resilience.
+   topics: operational resilience, banking regulation, risk management, business continuity, third-party management
+   signals: docSim=0.273*0.5 chunkAgg=0.000*0.3 recency=0.472*0.2 hits=0 bestRank=0
+3. Guo et al., LightRAG: Simple and Fast Retrieval-Augmented Generation [C2] — score 0.58
+   Strong topical overlap on retrieval-augmented generation, information retrieval.
+   topics: retrieval-augmented generation, graph structures, information retrieval, contextual awareness, machine learning
+   signals: docSim=0.859*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0
+4. Peng et al., Graph Retrieval-Augmented Generation: A Survey [C1] — score 0.58
+   Strong topical overlap on large language models, information retrieval.
+   topics: graph retrieval, augmented generation, large language models, knowledge graphs, information retrieval
+   signals: docSim=0.893*0.5 chunkAgg=0.000*0.3 recency=0.651*0.2 hits=0 bestRank=0
+5. Es et al., RAGAS: Automated Evaluation of Retrieval Augmented Generation (v2) [C5] — score 0.56
+   Strong topical overlap on retrieval-augmented generation. Supersedes C4, Sep 2023.
+   topics: retrieval-augmented generation, evaluation framework, automated assessment, language models, machine learning
+   signals: docSim=0.832*0.5 chunkAgg=0.000*0.3 recency=0.742*0.2 hits=0 bestRank=0

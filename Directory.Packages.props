@@ -1,0 +1,54 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Semantic Kernel. 1.78.0 is the current stable line (the brief's "1.6x" has moved on;
+         recorded in README Deviations). -->
+    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.78.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.78.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Agents.Core" Version="1.78.0" />
+    <!-- KernelFunctionYaml.FromPromptYaml, for prompts/answer.yaml (brief §8). -->
+    <PackageVersion Include="Microsoft.SemanticKernel.Yaml" Version="1.78.0" />
+    <!-- InMemory vector connector has no stable release; latest preview. VectorData is pinned
+         to EXACTLY the version the connector binary was compiled against: 10.8.0 removed
+         VectorSearchFilter (an in-major break during the preview era) and the 1.74 connector
+         still references it, so anything newer than 10.1.0 throws TypeLoadException on the
+         first SearchAsync at runtime. Found live, recorded in README Deviations/FAILURES. -->
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.InMemory" Version="1.74.0-preview" />
+    <PackageVersion Include="Microsoft.Extensions.VectorData.Abstractions" Version="10.1.0" />
+    <!-- IEmbeddingGenerator<string, Embedding<float>> lives here (the brief's §6.5 pipeline
+         signature). Same 10.8 line as VectorData.Abstractions. -->
+    <PackageVersion Include="Microsoft.Extensions.AI.Abstractions" Version="10.8.0" />
+
+    <!-- Extraction: Azure AI Document Intelligence replaces the brief's PdfPig + Tesseract
+         (sanctioned deviation, see README). Docnet.Core is kept ONLY to rasterise A1 into the
+         manufactured scanned test PDF - it is not an extractor. -->
+    <PackageVersion Include="Azure.AI.DocumentIntelligence" Version="1.0.0" />
+    <PackageVersion Include="Docnet.Core" Version="2.6.0" />
+
+    <!-- Lucene.Net ships only on the 4.8 beta line; the 3.0.3 "stable" is the 2012 codebase.
+         Analysis.Common is the companion package holding StandardAnalyzer — the core dll ships
+         only the analysis framework, not the analyzers themselves. -->
+    <PackageVersion Include="Lucene.Net" Version="4.8.0-beta00018" />
+    <PackageVersion Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00018" />
+
+    <!-- Tokenizer for the ~800-token chunk windows. cl100k_base matches the OpenAI embedding
+         models (text-embedding-3-*), so chunk sizes are measured in the same tokens the
+         embedding model actually sees. -->
+    <PackageVersion Include="Microsoft.ML.Tokenizers" Version="2.0.0" />
+    <PackageVersion Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="2.0.0" />
+
+    <!-- Configuration (user-secrets only; no keys in the repo). -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.10" />
+
+    <!-- Tests -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+  </ItemGroup>
+</Project>
